@@ -2,18 +2,7 @@ import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 
-const todos = [
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  }
-];
+const todos = [];
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -25,44 +14,70 @@ class App extends React.Component {
       todosOnState: todos,
       todo: {
         task: '',
-        id: '',
-        completed: false
       }
     };
   }
 
   newTodo = event => {
-    console.log(event.target.name);
     this.setState({
       todo: {
         ...this.state.todo,
         [event.target.name]: event.target.value,
-        id: Date.now()
       }
-    })
-  }
+  })}
 
-  addTodo = event => {
+  addTodo = (event) => {
     event.preventDefault();
+    const newTodo = {
+      task: this.state.todo.task,
+      id: Date.now(),
+      completed: false
+    }
     this.setState({
-      todosOnState: [...this.state.todosOnState, this.state.todo],
+      todosOnState: [...this.state.todosOnState, newTodo],
       todo: {
         task: ''
       }
+  })}
+
+  completed = todoId => {
+    this.setState({
+      todosOnState: this.state.todosOnState.map(todo => {
+        if(todoId === todo.id){
+          return{
+            ...todo,
+            completed: !todo.completed
+          };
+        } else {
+          return todo;
+        }
+      }) 
     })
-    
+  }
+
+  clear = event => {
+    event.preventDefault();
+    this.setState({
+      todosOnState: this.state.todosOnState.filter(todo => {
+        return !todo.completed;
+      })
+    })
   }
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
+      <div className='app'>
+        <h2>Welcome to Your Todo App!</h2>
 
-        <TodoList list={this.state.todosOnState}/>
+        <TodoList 
+            list={this.state.todosOnState}
+            completed={this.completed}
+          />
         <TodoForm 
             todo={this.state.todo}
             newTodo={this.newTodo} 
             addTodo={this.addTodo}
+            clear={this.clear}
         />
       </div>
     );

@@ -1,0 +1,53 @@
+body{
+    background: rgb(86,128,233);
+    background: radial-gradient(circle, rgba(86,128,233,1) 0%, rgba(90,185,234,1) 35%, rgba(193,200,228,1) 100%);
+}
+.app{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+    color: #8860d0;
+    font-family: 'Shadows Into Light', cursive;
+}
+.completed{
+    text-decoration-line: line-through;
+}
+
+.todoForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.todoForm input{
+    border: none;
+    width: 300px;
+    margin: 5px auto;
+    background: transparent;
+    border-bottom: 1px solid #84ceeb;
+    padding: 5px;
+    color: #8860d0;
+}
+.todoForm .btns {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.todoForm button{
+    width: 49%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    color: #5680e9;
+    font-size: 1rem;
+    background: #84ceeb;
+}
+.todoList{
+    display: flex;
+    flex-flow: column wrap;
+    max-height: 600px;
+    font-size: 1.4rem;
+}
